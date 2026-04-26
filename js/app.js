@@ -314,7 +314,14 @@ document.addEventListener('keydown', (e) => {
 
 function filterBySearch(query) {
   const q = query.trim().toLowerCase();
-  if (!q) return;
+  if (!q) {
+    renderCards(destinationsGrid, destinations);
+    renderCards(attractionsGrid, attractions);
+    filterBtns.forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.filter === 'all');
+    });
+    return;
+  }
 
   const filteredDest = destinations.filter(
     (d) =>
